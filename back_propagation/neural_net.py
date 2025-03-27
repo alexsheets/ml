@@ -64,4 +64,24 @@ class Neuron:
         # repeat the process of calculating net input and squashing for each
         # using the output from hidden layer neurons as inputs
         self.output = self.squash(self.net_input())
+        return self.output
         
+    # calc total error for each output neuron using squared error func
+    # total err = 1/2 * (target - output)^2
+    def calc_error(self, target_output):
+        return (1/2) * (target_output - self.output) ** 2
+    
+    # need partial derivative/gradient descent with respect to total net input, output
+    # our goal in backpropagatoin: update weights in network so they cause actual
+    # output to be closer to target output
+
+    # we have partial derivative of error with respect to output and derivative of output with respect to total net input
+    # we can calculate the partial derivative of error with respect to total net input
+    def calc_pd_err_total_net_input(self, target_output):
+        return self.calc_pd_err_total_net_input(target_output) * self.calc_pd_total_net_input()
+    
+    # total net input into neuron squashed using logistic function to calculate neurons output
+    # yⱼ = φ = 1 / (1 + e^(-zⱼ))
+    # j represents the output of the neurons in whatever layer we're looking at, i represents the layer below it
+    def calc_pd_total_net_input(self):
+        return self.output * (1 - self.output)
