@@ -83,3 +83,16 @@ class Neuron:
     # j represents the output of the neurons in whatever layer we're looking at, i represents the layer below it
     def calc_pd_total_net_input(self):
         return self.output * (1 - self.output)
+    
+    # partial derivative of error with respect to actual output is calculated by
+    # 2 * 0.5 * (target - actual) ^ (2 - 1) * -1
+    # which turns into -(target - actual)
+    def calc_pd_err_output(self, target_output):
+        return -(target_output - self.outputs)
+    
+    # total net input is weighted sum of all inputs to neuron and respective weights
+    # partial derivative of net input with respect to given weight then is
+    # = ∂zⱼ/∂wᵢ = some constant + 1 * xᵢw₁^(1-0) + some constant ... = xᵢ
+    # ie simply return the inputs
+    def calc_pd_total_net_input_weights(self, index):
+        return self.inputs[index]
