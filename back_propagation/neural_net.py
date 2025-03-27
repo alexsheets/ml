@@ -17,10 +17,7 @@ import math
 # hidden neuron: node within a hidden layer of a neural network which is neither input nor output layer
 # output neuron: node in final layer of neural network which produces model's prediction or result
 
-# example of initial weights, biases, training inputs and outputs: https://mattmazur.com/wp-content/uploads/2018/03/neural_network-9.png
-
-# Wikipedia article on Backpropagation
-#   http://en.wikipedia.org/wiki/Backpropagation#Finding_the_derivative_of_the_error
+# wikipedia article on backpropagation: http://en.wikipedia.org/wiki/Backpropagation#Finding_the_derivative_of_the_error
 
 class BackPropagation:
     LEARNING_RATE = 0.5
@@ -32,6 +29,31 @@ class NeuronLayer:
         self.neurons = []
         for i in range(num):
             self.neurons.append(Neuron(self.bias))
+
+    # signals travel from first (input) to last (output) layer while passing multiple hidden layers
+    # neuron (hidden) layer needs to basically process neurons
+    # by either feeding them forward or retrieving the outputs
+
+    # feed forward neural network: information flows in one direction: as mentioned above, input -> hidden -> output
+    def feed_forward(self, inputs):
+        outputs = []
+        for n in self.neurons:
+            outputs.append(n.calc_output(inputs))
+        return outputs
+    
+    def get_output(self):
+        outputs = []
+        for n in self.neurons:
+            outputs.append(n.output)
+        return outputs
+    
+    # define an inspect function to view neurons along with their weight and biases
+    def inspect(self):
+        for n in self.neurons:
+            print('Neuron: ', n)
+            for w in self.neurons[n].weights:
+                print('Weight: ', self.neurons[n].weights[w])
+            print('Bias: ', self.bias)
 
 
 class Neuron:
