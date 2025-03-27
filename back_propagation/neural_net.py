@@ -17,12 +17,10 @@ import math
 # hidden neuron: node within a hidden layer of a neural network which is neither input nor output layer
 # output neuron: node in final layer of neural network which produces model's prediction or result
 
-# initial weights, biases, training inputs and outputs: https://mattmazur.com/wp-content/uploads/2018/03/neural_network-9.png
+# example of initial weights, biases, training inputs and outputs: https://mattmazur.com/wp-content/uploads/2018/03/neural_network-9.png
 
 # Wikipedia article on Backpropagation
 #   http://en.wikipedia.org/wiki/Backpropagation#Finding_the_derivative_of_the_error
-# The Back Propagation Algorithm
-#   https://www4.rgu.ac.uk/files/chapter3%20-%20bp.pdf
 
 class BackPropagation:
     LEARNING_RATE = 0.5
