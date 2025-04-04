@@ -31,16 +31,28 @@ class BackPropagation:
         self.hidden_layer1 = NeuronLayer(num_hidden1, hidden_layer_bias)
         self.hidden_layer2 = NeuronLayer(num_hidden2, hidden_layer_bias)
 
+        self.output_layer = NeuronLayer(num_outputs, output_layer_bias)
+
         self.init_input_weights_to_hidden_layer(hidden_layer=self.hidden_layer1, hidden_layer_weights=hidden_layer1_weights)
 
     def init_input_weights_to_hidden_layer(self, hidden_layer, hidden_layer_weights):
         weight = 0
-        for h in range(len(self.hidden_layer.neurons)):
+        for h in range(len(hidden_layer.neurons)):
             for i in range(self.num_inputs):
                 if not hidden_layer_weights:
                     hidden_layer.neurons[h].weights.append(random.random())
                 else:
                     hidden_layer.neurons[h].weights.append(hidden_layer_weights[weight])
+                weight += 1
+
+    def feed_weights_from_hidden_to_output(self, hidden_layer, output_layer_weights):
+        weight = 0
+        for h in range(len(self.output_layer.neurons)):
+            for i in range(len(hidden_layer.neurons)):
+                if not output_layer_weights:
+                    self.output_layer.neurons[h].weights.append(random.random())
+                else:
+                    self.output_layer.neurons[h].weights.append(output_layer_weights[weight])
                 weight += 1
 
 
