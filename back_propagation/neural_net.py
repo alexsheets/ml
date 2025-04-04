@@ -19,8 +19,29 @@ import math
 
 # wikipedia article on backpropagation: http://en.wikipedia.org/wiki/Backpropagation#Finding_the_derivative_of_the_error
 
+# work on adding updates to weights of biases
+
 class BackPropagation:
     LEARNING_RATE = 0.5
+
+    def __init__(self, num_inputs, num_outputs, num_hidden1, num_hidden2, hidden_layer1_weights=None, hidden_layer2_weights=None, hidden_layer_bias=None, output_layer_weights=None, output_layer_bias=None):
+        # get num inputs and create hidden and output layers
+        self.num_inputs = num_inputs
+
+        self.hidden_layer1 = NeuronLayer(num_hidden1, hidden_layer_bias)
+        self.hidden_layer2 = NeuronLayer(num_hidden2, hidden_layer_bias)
+
+        self.init_input_weights_to_hidden_layer(hidden_layer=self.hidden_layer1, hidden_layer_weights=hidden_layer1_weights)
+
+    def init_input_weights_to_hidden_layer(self, hidden_layer, hidden_layer_weights):
+        weight = 0
+        for h in range(len(self.hidden_layer.neurons)):
+            for i in range(self.num_inputs):
+                if not hidden_layer_weights:
+                    hidden_layer.neurons[h].weights.append(random.random())
+                else:
+                    hidden_layer.neurons[h].weights.append(hidden_layer_weights[weight])
+                weight += 1
 
 
 class NeuronLayer:
